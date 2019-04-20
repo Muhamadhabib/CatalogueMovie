@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.habib.movie">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <permission
+        android:name="com.habib.movie.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.habib.movie.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".notification.SettingActivity"></activity>
+
+        <receiver android:name=".widget.ImageWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/image_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".tv.DetailTvActivity"
+            android:label="@string/title_activity_detail_tv"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".movie.DetailMovieActivity"
+            android:label="@string/title_activity_detail_movie"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Main2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".widget.StackService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".widget.UpdateWidget"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <provider
+            android:name=".provider.Providers"
+            android:authorities="com.habib.movie"
+            android:exported="true"
+            android:readPermission="com.habib.movie.READ_DATABASE"
+            android:writePermission="com.habib.movie.WRITE_DATABASE" />
+        <receiver android:name=".notification.DailyReminder"
+            android:enabled="true"
+            android:exported="false"/>
+        <receiver android:name=".notification.ReleaseReminder"
+            android:enabled="true"
+            android:exported="false"/>
+    </application>
+
+</manifest>
